@@ -24,3 +24,6 @@ python_impl:
 - cpython
 qt:
 - '5.12'
+zip_keys:
+- - python
+  - python_impl

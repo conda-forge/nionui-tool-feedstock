@@ -11,7 +11,7 @@ source:
 
 build:
   number: 0
-  skip: True  # [py2k]
+  skip: True  # [py2k or python.endswith('pypy')]
   entry_points:
     - nionui-tool = nion.nionui_tool.command:main
   binary_relocation: False

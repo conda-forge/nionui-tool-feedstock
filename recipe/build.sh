@@ -6,7 +6,12 @@ if [[ "$target_platform" == linux* ]]; then
   ls -R .
   cp ${RECIPE_DIR}/CMakeLists.txt launcher/CMakeLists.txt
   pushd launcher
-  cmake CMakeLists.txt
+  # conda info
+  # conda list
+  # conda env list
+  "${PYTHON}" --version
+  # default python is from the activate conda environment which is not the build environment; specify python to cmake
+  cmake CMakeLists.txt -DPython3_EXECUTABLE="$PYTHON"
   cmake --build . --config Release
   ls -R .
   mkdir -p linux
@@ -21,7 +26,12 @@ if [[ "$target_platform" == "osx-64" ]]; then
   ls -R .
   cp ${RECIPE_DIR}/CMakeLists.txt launcher/CMakeLists.txt
   pushd launcher
-  cmake CMakeLists.txt
+  # conda info
+  # conda list
+  # conda env list
+  "${PYTHON}" --version
+  # default python is from the activate conda environment which is not the build environment; specify python to cmake
+  cmake CMakeLists.txt -DPython3_EXECUTABLE="$PYTHON"
   cmake --build . --config Release
   ls -R .
   mkdir -p build/Release

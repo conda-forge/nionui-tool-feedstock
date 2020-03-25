@@ -31,11 +31,13 @@ requirements:
     - {{ cdt('libxext') }}     # [linux]
     - cmake
     - make  # [not win]
-    - python 3.7
-    - qt
+    - python 3.7.*
     - numpy 1.14.*
+    - qt
   host:
-    - python {{ python }}
+    - python 3.7.*
+    - numpy 1.14.*
+    - qt
     - pip
     - setuptools
     - xorg-libxfixes  # [linux]

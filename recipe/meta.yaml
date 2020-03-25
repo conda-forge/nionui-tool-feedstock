@@ -10,7 +10,7 @@ source:
     sha256: cbb89a12b94c48cb28c83e0da8503eaf0c7d4fdcb6720a1d97f1b172f53e51f9
 
 build:
-  number: 1
+  number: 2
   skip: True  # [py2k or python_impl == 'pypy']
   entry_points:
     - nionui-tool = nion.nionui_tool.command:main
@@ -33,7 +33,7 @@ requirements:
     - make  # [not win]
     - python 3.7
     - qt
-    - numpy
+    - numpy 1.14.*
   host:
     - python {{ python }}
     - pip

@@ -6,11 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://github.com/nion-software/{{ name }}/archive/{{ version }}.tar.gz
-    sha256: cbb89a12b94c48cb28c83e0da8503eaf0c7d4fdcb6720a1d97f1b172f53e51f9
+  url: https://github.com/nion-software/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: cbb89a12b94c48cb28c83e0da8503eaf0c7d4fdcb6720a1d97f1b172f53e51f9
+  patches:
+    - fix_pydealloc.patch
 
 build:
-  number: 4
+  number: 5
   skip: True  # [py2k or python_impl == 'pypy']
   entry_points:
     - nionui-tool = nion.nionui_tool.command:main
@@ -20,7 +22,7 @@ build:
   missing_dso_whitelist: "**/*"
 
 requirements:
-  build:
+  host:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ cdt('mesa-libgl-devel') }}  # [linux]
@@ -31,11 +33,7 @@ requirements:
     - {{ cdt('libxext') }}     # [linux]
     - cmake
     - make  # [not win]
-    - python 3.7.*
-    - numpy 1.14.*
-    - qt
-  host:
-    - python 3.7.*
+    - python
     - numpy 1.14.*
     - qt
     - pip

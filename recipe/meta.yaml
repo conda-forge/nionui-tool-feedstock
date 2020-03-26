@@ -12,7 +12,7 @@ source:
     - fix_pydealloc.patch
 
 build:
-  number: 5
+  number: 6
   skip: True  # [py2k or python_impl == 'pypy']
   entry_points:
     - nionui-tool = nion.nionui_tool.command:main
@@ -20,6 +20,8 @@ build:
   ignore_prefix_files: True
   detect_binary_files_with_prefix: False
   missing_dso_whitelist: "**/*"
+  ignore_run_exports:
+    - qt
 
 requirements:
   host:

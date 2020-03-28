@@ -1,10 +1,10 @@
-dir /S
+REM dir /S
 
 REM conda info
 REM conda list
 REM conda env list
 
-"%PYTHON%" --version
+REM "%PYTHON%" --version
 
 copy /Y %RECIPE_DIR%\CMakeLists.txt launcher\CMakeLists.txt
 
@@ -17,10 +17,10 @@ REM default python is from the activate conda environment which is not the build
 cmake -G "NMake Makefiles" -B. -S.. -DCMAKE_BUILD_TYPE:STRING=Release -DPython3_EXECUTABLE="%PYTHON%"
 if errorlevel 1 exit /b 1
 
-dir /S
+REM dir /S
 
 REM cmake --build . --config Release
-nmake
+cmake --build . --config Release
 if errorlevel 1 exit /b 1
 
 ren build Release
@@ -28,7 +28,7 @@ if errorlevel 1 exit /b 1
 
 popd
 
-dir /S
+REM dir /S
 
 "%PYTHON%" -m pip install --no-deps --ignore-installed .
 if errorlevel 1 exit /b 1

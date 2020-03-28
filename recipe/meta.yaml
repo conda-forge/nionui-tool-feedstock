@@ -12,7 +12,7 @@ source:
     - fix_pydealloc.patch
 
 build:
-  number: 6
+  number: 7
   skip: True  # [py2k or python_impl == 'pypy']
   entry_points:
     - nionui-tool = nion.nionui_tool.command:main
@@ -33,6 +33,7 @@ requirements:
     - {{ cdt('libxdamage') }}  # [linux]
     - {{ cdt('libxxf86vm') }}  # [linux]
     - {{ cdt('libxext') }}     # [linux]
+    - chrpath  # [linux]
     - cmake
     - make  # [not win]
     - python

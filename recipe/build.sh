@@ -1,10 +1,10 @@
 #!/bin/bash
 
 if [[ "$target_platform" == linux* ]]; then
-  set
+  # set
   # pwd
   # ls -R .
-  cp ${RECIPE_DIR}/CMakeLists.txt launcher/CMakeLists.txt
+  # cp ${RECIPE_DIR}/CMakeLists.txt launcher/CMakeLists.txt
   pushd launcher
   # conda info
   # conda list
@@ -26,7 +26,7 @@ if [[ "$target_platform" == "osx-64" ]]; then
   # set
   # pwd
   # ls -R .
-  cp ${RECIPE_DIR}/CMakeLists.txt launcher/CMakeLists.txt
+  # cp ${RECIPE_DIR}/CMakeLists.txt launcher/CMakeLists.txt
   pushd launcher
   # conda info
   # conda list

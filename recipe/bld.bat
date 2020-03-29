@@ -6,7 +6,7 @@ REM conda env list
 
 REM "%PYTHON%" --version
 
-copy /Y %RECIPE_DIR%\CMakeLists.txt launcher\CMakeLists.txt
+REM copy /Y %RECIPE_DIR%\CMakeLists.txt launcher\CMakeLists.txt
 
 mkdir launcher\x64
 if errorlevel 1 exit /b 1

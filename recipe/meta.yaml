@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/nion-software/{{ name }}/archive/{{ version }}.tar.gz
   sha256: 50728b244ba5cb0caa3fc6c08bb9735dac0bc03b9e6a6bb482fde997f06642e0
+  patches:
+    - patches/0001-Fix-wheel.patch
 
 build:
   number: 0

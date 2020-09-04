@@ -39,6 +39,7 @@ requirements:
     - qt
     - pip
     - setuptools
+    - wheel <=0.34.2
     - xorg-libxfixes  # [linux]
   run:
     - python

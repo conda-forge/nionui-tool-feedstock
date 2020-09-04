@@ -1,101 +1,61 @@
 diff --git a/setup.py b/setup.py
-index 1b999fd..54af037 100644
+index 1b999fd..7671853 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -2,6 +2,7 @@ import os
- import pathlib
- import setuptools
- import sys
-+from wheel.bdist_wheel import bdist_wheel
+@@ -30,7 +30,8 @@ class BinaryDistribution(setuptools.Distribution):
  
- tool_id = "nionui"
- version = "0.4.5"
-@@ -28,11 +29,6 @@ class BinaryDistribution(setuptools.Distribution):
-         return True
- 
- 
--from distutils.util import get_platform
--from wheel.bdist_wheel import bdist_wheel as bdist_wheel_
+ from distutils.util import get_platform
+ from wheel.bdist_wheel import bdist_wheel as bdist_wheel_
 -from wheel.pep425tags import get_abbr_impl, get_impl_ver, get_abi_tag, get_platform, get_supported
--
--
++from packaging import tags
++from wheel.bdist_wheel import get_abi_tag, get_platform
+ 
+ 
  # the bdist_wheel tools are awful and undocumented
- # much of the techniques in this file were from other libraries and reading the source
- # the wheel code is a separate project from setuptools
-@@ -46,12 +42,10 @@ from wheel.pep425tags import get_abbr_impl, get_impl_ver, get_abi_tag, get_platf
- # see http://code.qt.io/cgit/pyside/pyside-setup.git/tree/build_scripts/wheel_override.py?id=824b7733c0bd8b162b198c67014d7f008fb71b8c
- 
- 
--class bdist_wheel(bdist_wheel_):
--    def run(self):
--        bdist_wheel_.run(self)
-+class bdist_wheel_universal(bdist_wheel):
- 
-     def finalize_options(self):
--        bdist_wheel_.finalize_options(self)
-+        bdist_wheel.finalize_options(self)
-         self.universal = True
-         self.plat_name_supplied = True
-         global platform, python_version, abi
-@@ -59,52 +53,6 @@ class bdist_wheel(bdist_wheel_):
-         self.py_limited_api = python_version
-         self.abi_tag = abi
- 
--    def get_tag(self):
--        # bdist sets self.plat_name if unset, we should only use it for purepy
--        # wheels if the user supplied it.
--        if self.plat_name_supplied:
--            plat_name = self.plat_name
--        elif self.root_is_pure:
--            plat_name = 'any'
--        else:
--            # macosx contains system version in platform name so need special handle
--            if self.plat_name and not self.plat_name.startswith("macosx"):
--                plat_name = self.plat_name
--            else:
--                plat_name = get_platform(self.bdist_dir)
--
--            if plat_name in ('linux-x86_64', 'linux_x86_64') and sys.maxsize == 2147483647:
--                plat_name = 'linux_i686'
--
--        plat_name = plat_name.replace('-', '_').replace('.', '_')
--
--        if self.root_is_pure:
--            if self.universal:
--                impl = 'py2.py3'
--            else:
--                impl = self.python_tag
--            tag = (impl, 'none', plat_name)
--        else:
+@@ -85,8 +86,8 @@ class bdist_wheel(bdist_wheel_):
+                 impl = self.python_tag
+             tag = (impl, 'none', plat_name)
+         else:
 -            impl_name = get_abbr_impl()
 -            impl_ver = get_impl_ver()
--            impl = impl_name + impl_ver
--            # We don't work on CPython 3.1, 3.0.
--            if self.py_limited_api and (impl_name + impl_ver).startswith('cp3'):
--                impl = self.py_limited_api
--                abi_tag = 'abi3'
--            else:
--                abi_tag = str(get_abi_tag()).lower()
--            abi_tag = self.abi_tag
--            tag = (impl, abi_tag, plat_name)
++            impl_name = tags.interpreter_name()
++            impl_ver = tags.interpreter_version()
+             impl = impl_name + impl_ver
+             # We don't work on CPython 3.1, 3.0.
+             if self.py_limited_api and (impl_name + impl_ver).startswith('cp3'):
+@@ -96,9 +97,7 @@ class bdist_wheel(bdist_wheel_):
+                 abi_tag = str(get_abi_tag()).lower()
+             abi_tag = self.abi_tag
+             tag = (impl, abi_tag, plat_name)
 -            supported_tags = get_supported(
 -                self.bdist_dir,
 -                supplied_platform=plat_name if self.plat_name_supplied else None)
--            # XXX switch to this alternate implementation for non-pure:
--            if not self.py_limited_api:
--                assert tag == supported_tags[0], "%s != %s" % (tag, supported_tags[0])
--            # assert tag in supported_tags, "would build wheel with unsupported tag {}".format(tag)
--        return tag
--
++            supported_tags = [(t.interpreter, t.abi, t.platform) for t in tags.sys_tags()]
+             # XXX switch to this alternate implementation for non-pure:
+             if not self.py_limited_api:
+                 assert tag == supported_tags[0], "%s != %s" % (tag, supported_tags[0])
+@@ -115,21 +114,21 @@ dest_drop = None
  
- platform = None
- python_version = None
-@@ -153,7 +101,7 @@ setuptools.setup(
-     },
-     data_files=data_files,
-     distclass=BinaryDistribution,
--    cmdclass={'bdist_wheel': bdist_wheel},
-+    cmdclass={'bdist_wheel': bdist_wheel_universal},
-     classifiers=[
-         'License :: OSI Approved :: Apache Software License',
-     ],
+ if sys.platform == "darwin":
+     platform = "macosx_10_11_intel"
+-    python_version = "cp36.cp37.cp38"
++    python_version = "cp37.cp38"
+     abi = "abi3"
+     dest = "bin"
+     dir_path = "launcher/build/Release"
+     dest_drop = 3
+ if sys.platform == "win32":
+     platform = "win_amd64"
+-    python_version = "cp36.cp37.cp38"
++    python_version = "cp37.cp38"
+     abi = "none"
+     dest = f"Scripts/{launcher}"
+     dir_path = "launcher/x64/Release"
+     dest_drop = 3
+ if sys.platform == "linux":
+     platform = "manylinux1_x86_64"
+-    python_version = "cp36.cp37.cp38"
++    python_version = "cp37.cp38"
+     abi = "abi3"
+     dest = f"bin/{launcher}"
+     dir_path = "launcher/linux/x64"

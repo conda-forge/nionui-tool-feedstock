@@ -1,5 +1,5 @@
 {% set name = "nionui-tool" %}
-{% set version = "0.4.5" %}
+{% set version = "0.4.8" %}
 
 package:
   name: {{ name|lower }}
@@ -7,9 +7,7 @@ package:
 
 source:
   url: https://github.com/nion-software/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 50728b244ba5cb0caa3fc6c08bb9735dac0bc03b9e6a6bb482fde997f06642e0
-  patches:
-    - patches/0001-Fix-wheel.patch
+  sha256: 27ca6ce465b39df7b5a5ac1fcd4a5b7318cc20d1eba8d73b4e6f186a293a9591
 
 build:
   number: 0
@@ -37,7 +35,7 @@ requirements:
     - cmake
     - make  # [not win]
     - python
-    - numpy 1.14.*
+    - numpy 1.19.*
     - qt
     - packaging
     - pip

@@ -10,7 +10,7 @@ source:
   sha256: 27ca6ce465b39df7b5a5ac1fcd4a5b7318cc20d1eba8d73b4e6f186a293a9591
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py2k or python_impl == 'pypy']
   entry_points:
     - nionui-tool = nion.nionui_tool.command:main

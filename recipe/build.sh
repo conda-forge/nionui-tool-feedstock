@@ -33,7 +33,7 @@ if [[ "$target_platform" == "osx-64" ]]; then
   # conda env list
   # "${PYTHON}" --version
   # default python is from the activate conda environment which is not the build environment; specify python to cmake
-  cmake CMakeLists.txt -DPython3_EXECUTABLE="$PYTHON"
+  cmake CMakeLists.txt -DPython3_EXECUTABLE="$PYTHON" -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON
   cmake --build . --config Release
   # ls -R .
   mkdir -p build/Release

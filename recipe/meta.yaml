@@ -1,5 +1,5 @@
 {% set name = "nionui-tool" %}
-{% set version = "0.4.9" %}
+{% set version = "0.4.10" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/nion-software/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 3e5d9798e73b3d2aceb03cca3c2345475e95f42bf062b7dec39eb4e472ea703c
+  sha256: b38eeece2c37085fb7ad725d9a5c2a84d17691b79098c936aeb24333f7b6874c
 
 build:
   number: 0
@@ -36,7 +36,7 @@ requirements:
     - make  # [not win]
     - python
     - numpy 1.19.*
-    - qt
+    - qt <6.0.0
     - packaging
     - pip
     - setuptools

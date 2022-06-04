@@ -10,7 +10,7 @@ source:
   sha256: 6a9f8c50776415e22cc50eff65b5054034a8aef0ddec62d8b8863deb6653dbf5
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py2k or python_impl == 'pypy']
   entry_points:
     - nionui-tool = nion.nionui_tool.command:main
@@ -19,7 +19,7 @@ build:
   detect_binary_files_with_prefix: false
   missing_dso_whitelist: '**/*'
   ignore_run_exports:
-    - qt
+    - qt-main
 
 requirements:
   host:
@@ -36,7 +36,7 @@ requirements:
     - make  # [not win]
     - python
     - numpy 1.19.*
-    - qt <6.0.0
+    - qt-main <6.0.0
     - packaging
     - pip
     - setuptools

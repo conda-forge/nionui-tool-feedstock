@@ -35,7 +35,7 @@ requirements:
     - cmake
     - make  # [not win]
     - python
-    - numpy 1.19.*
+    - numpy 1.22.*
     - qt <6.0.0
     - packaging
     - pip

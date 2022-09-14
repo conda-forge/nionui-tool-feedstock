@@ -1,5 +1,5 @@
 {% set name = "nionui-tool" %}
-{% set version = "0.4.14" %}
+{% set version = "0.4.15" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/nion-software/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: f66d0e2e8bf437d893325a12892869e418973427ae93ab5ce53c4ea73abbb611
+  sha256: ebae11c4e292601e8f8c7a9c36a3d7ef03abd5ad62b05d6aa889c648470552b7
 
 build:
-  number: 1
+  number: 0
   skip: true  # [py2k or python_impl == 'pypy']
   entry_points:
     - nionui-tool = nion.nionui_tool.command:main

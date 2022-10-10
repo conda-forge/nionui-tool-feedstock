@@ -8,6 +8,9 @@ package:
 source:
   url: https://github.com/nion-software/{{ name }}/archive/{{ version }}.tar.gz
   sha256: 27afece3298b2e427e9c4d82aed9d9ff066aafa16b1978478d227f1d4b454d0d
+  patches:
+    - patches/0001-Find-windeployqt-in-proper-location.patch
+    - patches/0002-macOS-x86-only-and-macosdeployqt.patch
 
 build:
   number: 0
@@ -19,7 +22,7 @@ build:
   detect_binary_files_with_prefix: false
   missing_dso_whitelist: '**/*'
   ignore_run_exports:
-    - qt-main
+    - qt6-main
 
 requirements:
   host:
@@ -36,7 +39,7 @@ requirements:
     - make  # [not win]
     - python
     - numpy 1.22.*
-    - qt-main <6.0.0
+    - qt6-main >=6.4.0,<7.0.0
     - packaging
     - pip
     - setuptools
@@ -44,8 +47,18 @@ requirements:
     - xorg-libxfixes  # [linux]
   run:
     - python
+    - qt6-main >=6.4.0,<7.0.0
+    - numpy >=1.21,<2.0
 
 test:
+  source_files:
+    - nionui_app_test
+  requires:
+    - pip
+    - nionui
+    - numpy
+    - scipy
+    - h5py
   commands:
     - test -f "$PREFIX/bin/nionui-tool"  # [osx]
     - test -f "$PREFIX/bin/Nion UI Launcher.app/Contents/MacOS/Nion UI Launcher"  # [osx]
@@ -56,6 +69,11 @@ test:
     - if not exist "%PREFIX%\\Scripts\\nionui-tool.exe" exit 1  # [win]
     - if not exist "%PREFIX%\\Scripts\\NionUILauncher\\NionUILauncher.exe" exit 1  # [win]
     - if not exist "%PREFIX%\\Scripts\\NionUILauncher\\bootstrap.py" exit 1  # [win]
+    - /usr/bin/sudo -n yum install -y xorg-x11-server-Xvfb  # [linux]
+    - python -m pip install nionui_app_test/
+    - nionui nionui_app.test_ack | grep ACK  # [osx]
+    - nionui nionui_app.test_ack | findstr /c:"ACK"  # [win]
+    - xvfb-run nionui nionui_app.test_ack | grep ACK  # [linux]
 
 about:
   home: http://github.com/nion-software/{{ name }}

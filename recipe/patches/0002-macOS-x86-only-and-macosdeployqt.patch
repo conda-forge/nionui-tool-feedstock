@@ -1,0 +1,37 @@
+From a00b0d0c0ec1632fce24e5fb55386c6a647b11cd Mon Sep 17 00:00:00 2001
+From: Chris Meyer <cmeyer1969@gmail.com>
+Date: Sat, 8 Oct 2022 13:58:44 -0700
+Subject: [PATCH 2/2] macOS x86 only and macosdeployqt
+
+---
+ launcher/CMakeLists.txt | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/launcher/CMakeLists.txt b/launcher/CMakeLists.txt
+index 5e63de6..11d1b20 100644
+--- a/launcher/CMakeLists.txt
++++ b/launcher/CMakeLists.txt
+@@ -25,7 +25,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
+ 
+ # must go before project
+ # set(CMAKE_OSX_ARCHITECTURES arm64;x86_64)
+-set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE STRING "Build architectures for Mac OS X" FORCE)
++# set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE STRING "Build architectures for Mac OS X" FORCE)
+ 
+ # set the project name
+ project(${APP_NAME} VERSION ${APP_VERSION})
+@@ -213,7 +213,10 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+     get_filename_component( _dir ${uic_location} DIRECTORY)
+     set(deployqt "${_dir}/../bin/macdeployqt")
+     if(NOT EXISTS ${deployqt})
+-      message(FATAL_ERROR "Failed to locate deployqt executable: [${deployqt}]")
++      set(deployqt "${_dir}/bin/macdeployqt")
++      if(NOT EXISTS ${deployqt})
++        message(FATAL_ERROR "Failed to locate deployqt executable: [${deployqt}]")
++      endif()
+     endif()
+ 
+     add_custom_command(TARGET ${APP_NAME}
+-- 
+2.38.0
+

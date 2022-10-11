@@ -22,7 +22,7 @@ if [[ "$target_platform" == linux* ]]; then
   "${PYTHON}" -m pip install --no-deps --ignore-installed .
 fi
 
-if [[ "$target_platform" == "osx-64" ]]; then
+if [[ "$target_platform" == osx* ]]; then
   # set
   # pwd
   # ls -R .

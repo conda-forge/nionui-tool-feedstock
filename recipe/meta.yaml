@@ -11,6 +11,7 @@ source:
   patches:
     - patches/0001-Find-windeployqt-in-proper-location.patch
     - patches/0002-macOS-x86-only-and-macosdeployqt.patch  # [osx and x86_64]
+    - patches/0003-macOS-arm-only-and-macosdeployqt.patch  # [osx and arm64]
 
 build:
   number: 1

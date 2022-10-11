@@ -10,7 +10,7 @@ source:
   sha256: 27afece3298b2e427e9c4d82aed9d9ff066aafa16b1978478d227f1d4b454d0d
   patches:
     - patches/0001-Find-windeployqt-in-proper-location.patch
-    - patches/0002-macOS-x86-only-and-macosdeployqt.patch
+    - patches/0002-macOS-x86-only-and-macosdeployqt.patch  # [osx and x86_64]
 
 build:
   number: 1

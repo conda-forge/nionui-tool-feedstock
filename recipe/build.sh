@@ -33,16 +33,17 @@ if [[ "$target_platform" == osx* ]]; then
   # conda env list
   # "${PYTHON}" --version
   # default python is from the activate conda environment which is not the build environment; specify python to cmake
-  echo "Prefix $PREFIX"
-  echo "whereis "
-  whereis cmake
-  echo "---------"
-  ls -R "$BUILD_PREFIX"
-  echo "---------"
-  ls -R "$PREFIX"
-  echo "---------"
-  conda env list
+  #  echo "Prefix $PREFIX"
+  #  echo "whereis "
+  #  whereis cmake
+  #  echo "---------"
+  #  ls -R "$BUILD_PREFIX"
+  #  echo "---------"
+  #  ls -R "$PREFIX"
+  #  echo "---------"
+  #  conda env list
   export QT_HOST_PATH="$BUILD_PREFIX"
+  export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
   cmake ${CMAKE_ARGS} CMakeLists.txt -DPython3_EXECUTABLE="$PYTHON" -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON
   cmake --build . --config Release
   # ls -R .

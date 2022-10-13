@@ -42,7 +42,7 @@ if [[ "$target_platform" == osx* ]]; then
   ls -R "$PREFIX"
   echo "---------"
   conda env list
-  export QT_HOST_PATH="PREFIX"
+  export QT_HOST_PATH="$BUILD_PREFIX"
   cmake ${CMAKE_ARGS} CMakeLists.txt -DPython3_EXECUTABLE="$PYTHON" -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON
   cmake --build . --config Release
   # ls -R .

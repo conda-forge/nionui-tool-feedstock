@@ -12,6 +12,10 @@ jobs:
         CONFIG: osx_64_python3.10
         UPLOAD_PACKAGES: 'True'
         SHORT_CONFIG: osx_64_python3.10
+      osx_64_python3.11:
+        CONFIG: osx_64_python3.11
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_64_python3.11
       osx_64_python3.8:
         CONFIG: osx_64_python3.8
         UPLOAD_PACKAGES: 'True'
@@ -24,6 +28,10 @@ jobs:
         CONFIG: osx_arm64_python3.10
         UPLOAD_PACKAGES: 'True'
         SHORT_CONFIG: osx_arm64_python3.10
+      osx_arm64_python3.11:
+        CONFIG: osx_arm64_python3.11
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: osx_arm64_python3.11
       osx_arm64_python3.8:
         CONFIG: osx_arm64_python3.8
         UPLOAD_PACKAGES: 'True'

@@ -1,0 +1,25 @@
+From 949f1d2af777013d578f1800e9b10ab9ccdc229c Mon Sep 17 00:00:00 2001
+From: Chris Meyer <cmeyer1969@gmail.com>
+Date: Wed, 21 Dec 2022 09:30:24 -0800
+Subject: [PATCH] Do not build fat binary.
+
+---
+ launcher/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/launcher/CMakeLists.txt b/launcher/CMakeLists.txt
+index 78c9514..584b1ab 100644
+--- a/launcher/CMakeLists.txt
++++ b/launcher/CMakeLists.txt
+@@ -25,7 +25,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
+ 
+ # must go before project
+ # set(CMAKE_OSX_ARCHITECTURES arm64;x86_64)
+-set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE STRING "Build architectures for Mac OS X" FORCE)
++# set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE STRING "Build architectures for Mac OS X" FORCE)
+ 
+ # set the project name
+ project(${APP_NAME} VERSION ${APP_VERSION})
+-- 
+2.39.0
+

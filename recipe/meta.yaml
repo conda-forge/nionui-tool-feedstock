@@ -1,5 +1,5 @@
 {% set name = "nionui-tool" %}
-{% set version = "0.4.17" %}
+{% set version = "0.4.18" %}
 
 package:
   name: {{ name|lower }}
@@ -7,13 +7,12 @@ package:
 
 source:
   url: https://github.com/nion-software/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 27afece3298b2e427e9c4d82aed9d9ff066aafa16b1978478d227f1d4b454d0d
+  sha256: 54afb7195436744b612d4889465993a5605a4e1ea9e0f0f494087e9184a2319e
   patches:
-    - patches/0001-Find-windeployqt-in-proper-location.patch
-    - patches/0002-macOS-x86-only-and-macosdeployqt.patch
+    - patches/0001-Do-not-build-fat-binary.patch
 
 build:
-  number: 2
+  number: 0
   skip: true  # [py2k or python_impl == 'pypy']
   entry_points:
     - nionui-tool = nion.nionui_tool.command:main

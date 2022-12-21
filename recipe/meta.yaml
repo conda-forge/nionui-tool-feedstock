@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/nion-software/{{ name }}/archive/{{ version }}.tar.gz
   sha256: 54afb7195436744b612d4889465993a5605a4e1ea9e0f0f494087e9184a2319e
+  patches:
+    - patches/0001-Do-not-build-fat-binary.patch
 
 build:
   number: 0

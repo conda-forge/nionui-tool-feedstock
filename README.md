@@ -1,11 +1,11 @@
-About nionui-tool
-=================
+About nionui-tool-feedstock
+===========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/nionui-tool-feedstock/blob/main/LICENSE.txt)
 
 Home: http://github.com/nion-software/nionui-tool
 
 Package license: Apache-2.0
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/nionui-tool-feedstock/blob/main/LICENSE.txt)
 
 Summary: A native launcher for Nion UI apps.
 

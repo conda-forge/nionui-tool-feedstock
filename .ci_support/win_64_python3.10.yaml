@@ -16,6 +16,8 @@ python:
 - '3.10'
 python_impl:
 - cpython
+qt6_main:
+- '6.5'
 target_platform:
 - win-64
 zip_keys:

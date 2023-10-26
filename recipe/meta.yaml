@@ -8,11 +8,9 @@ package:
 source:
   url: https://github.com/nion-software/{{ name }}/archive/{{ version }}.tar.gz
   sha256: a85f0d0d70246c616ba94c9f48e6ffa9e0cee43949f6d684bacd41b4e24f7d5b
-  patches:
-    - patches/0001-Do-not-build-fat-binary.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py2k or python_impl == 'pypy']
   entry_points:
     - nionui-tool = nion.nionui_tool.command:main

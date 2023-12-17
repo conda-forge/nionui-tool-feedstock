@@ -1,5 +1,5 @@
 {% set name = "nionui-tool" %}
-{% set version = "0.4.21" %}
+{% set version = "0.4.22" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/nion-software/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: a85f0d0d70246c616ba94c9f48e6ffa9e0cee43949f6d684bacd41b4e24f7d5b
+  sha256: 50e2fa59a4ebba4e1fe313a091baaa0e688b4f65d19eb617c64fd605ce18bf5c
   patches:
     - patches/0001-Do-not-build-fat-binary.patch
 

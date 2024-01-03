@@ -1,5 +1,5 @@
 {% set name = "nionui-tool" %}
-{% set version = "0.4.21" %}
+{% set version = "0.4.22" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/nion-software/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: a85f0d0d70246c616ba94c9f48e6ffa9e0cee43949f6d684bacd41b4e24f7d5b
+  sha256: 50e2fa59a4ebba4e1fe313a091baaa0e688b4f65d19eb617c64fd605ce18bf5c
   patches:
     - patches/0001-Do-not-build-fat-binary.patch
 
@@ -40,11 +40,11 @@ requirements:
     - pip                                   # [build_platform != target_platform]
     - cross-python_{{ target_platform }}    # [build_platform != target_platform]
     - numpy 1.26.*                          # [build_platform != target_platform]
-    - qt6-main >=6.6.0,<7.0.0               # [build_platform != target_platform]
+    - qt6-main >=6.6.1,<7.0.0               # [build_platform != target_platform]
   host:
     - python
     - numpy 1.26.*
-    - qt6-main >=6.6.0,<7.0.0
+    - qt6-main >=6.6.1,<7.0.0
     - packaging
     - pip
     - setuptools
@@ -52,7 +52,7 @@ requirements:
     - xorg-libxfixes  # [linux]
   run:
     - python
-    - qt6-main >=6.6.0,<7.0.0
+    - qt6-main >=6.6.1,<7.0.0
     - numpy >=1.26,<2.0
 
 test:

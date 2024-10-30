@@ -13,7 +13,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<311 or py2k or python_impl == 'pypy']
+  skip: true  # [py<311]
   entry_points:
     - nionui-tool = nion.nionui_tool.command:main
   binary_relocation: false
@@ -34,6 +34,7 @@ requirements:
     - {{ cdt('libxdamage') }}  # [linux]
     - {{ cdt('libxxf86vm') }}  # [linux]
     - {{ cdt('libxext') }}     # [linux]
+    - {{ cdt('xorg-x11-server-xvfb') }}  # [linux]
     - chrpath  # [linux]
     - cmake
     - make  # [not win]
@@ -75,9 +76,10 @@ test:
     - python -m pip install nionui_app_test/
     - nionui nionui_app.test_ack | grep ACK  # [osx]
     - nionui nionui_app.test_ack | findstr /c:"ACK"  # [win]
-    # disable linux tests until xvfb-run reliably exits after running the app
-    # - /usr/bin/sudo -n yum install -y xorg-x11-server-Xvfb  # [linux]
-    # - xvfb-run -a nionui nionui_app.test_ack  # [linux]
+    # xvfb-run hangs on linux, so we need to run it in the background. probably due to something with SIGUSR1 signal.
+    - xvfb-run -a nionui nionui_app.test_ack > ack.txt &  # [linux]
+    - sleep 30  # [linux]
+    - cat ack.txt | grep ACK  # [linux]
 
 about:
   home: http://github.com/nion-software/{{ name }}

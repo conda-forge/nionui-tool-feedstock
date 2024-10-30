@@ -7,3 +7,4 @@ libXxf86vm
 libXext
 libglvnd-opengl
 libglvnd-egl
+xorg-x11-server-Xvfb

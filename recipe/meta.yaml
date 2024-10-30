@@ -13,7 +13,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<311 or py2k or python_impl == 'pypy']
+  skip: true  # [py<311]
   entry_points:
     - nionui-tool = nion.nionui_tool.command:main
   binary_relocation: false

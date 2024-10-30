@@ -72,11 +72,12 @@ test:
     - if not exist "%PREFIX%\\Scripts\\nionui-tool.exe" exit 1  # [win]
     - if not exist "%PREFIX%\\Scripts\\NionUILauncher\\NionUILauncher.exe" exit 1  # [win]
     - if not exist "%PREFIX%\\Scripts\\NionUILauncher\\bootstrap.py" exit 1  # [win]
-    - /usr/bin/sudo -n yum install -y xorg-x11-server-Xvfb  # [linux]
     - python -m pip install nionui_app_test/
     - nionui nionui_app.test_ack | grep ACK  # [osx]
     - nionui nionui_app.test_ack | findstr /c:"ACK"  # [win]
-    - /usr/bin/sudo -n xvfb-run -a nionui nionui_app.test_ack  # [linux]
+    # disable linux tests until xvfb-run reliably exits after running the app
+    # - /usr/bin/sudo -n yum install -y xorg-x11-server-Xvfb  # [linux]
+    # - xvfb-run -a nionui nionui_app.test_ack  # [linux]
 
 about:
   home: http://github.com/nion-software/{{ name }}
